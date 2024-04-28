@@ -2141,16 +2141,20 @@ function path_is_absolute( $path ) {
 }
 
 /**
- * Joins two filesystem paths together.
+ * Joins two filesystem paths, a base and a relative path, into a single path.
  *
- * For example, 'give me $path relative to $base'. If the $path is absolute,
- * then it the full path is returned.
+ * This function combines a base path with another path. If the supplied 'path' parameter
+ * is an absolute path, it returns this path unchanged. If 'path' is relative, it appends
+ * it to 'base', ensuring there is exactly one separator ('/') between them.
+ *
+ * For example, calling path_join('/usr/local', 'bin') returns '/usr/local/bin'. If 'path'
+ * is absolute, such as '/bin', calling path_join('/usr/local', '/bin') returns '/bin'.
  *
  * @since 2.5.0
  *
- * @param string $base Base path.
- * @param string $path Path relative to $base.
- * @return string The path with the base or absolute path.
+ * @param string $base Base path from which the other path is relative.
+ * @param string $path Path to be joined with the base. It can be an absolute or a relative path.
+ * @return string The combined path if 'path' is relative, or the unchanged 'path' if it is absolute.
  */
 function path_join( $base, $path ) {
 	if ( path_is_absolute( $path ) ) {
